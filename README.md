@@ -1602,11 +1602,49 @@ sebanyak tiga percobaan dan lakukan analisis testing menggunakan apache benchmar
 
 - Configuration
 
-  `Put your configuration in here`
+  ```
+  # Node LunaLovegood & FiliusFlitwick & Chochang (Laravel Worker)
+
+	echo '
+	[www]
+	user = www-data
+	group = www-data
+	listen = /run/php/php8.0-fpm.sock
+	listen.owner = www-data
+	listen.group = www-data
+	php_admin_value[disable_functions] = exec,passthru,shell_exec,system
+	php_admin_flag[allow_url_fopen] = off
+	
+	pm = dynamic
+	pm.max_children = 75
+	pm.start_servers = 10
+	pm.min_spare_servers = 5
+	pm.max_spare_servers = 20
+	' > /etc/php/8.0/fpm/pool.d/www.conf
+	
+	/etc/init.d/php8.0-fpm restart
+	
+	service nginx restart
+  ```
+
+  ```
+	# Node SusanBones
+	ab -n 100 -c 10 http://ravenclaw.hogwarts.D03.com/
+	ab -n 100 -c 10 http://ravenclaw.hogwarts.D03.com/
+	ab -n 100 -c 10 http://ravenclaw.hogwarts.D03.com/
+  ```
 
 - Explanation
 
-  `Put your explanation in here`
+  ```
+  	Node LunaLovegood & FiliusFlitwick & Chochang (Laravel Worker):
+	mengubah konfigurasi file ' /etc/php/8.0/fpm/pool.d/www.conf' untuk meningkatkan kinerja PHP-FPM pada masing-masing worker.
+	php-fpm restart
+	nginx restart
+  
+	Node SusanBones:
+	Lakukan apache benchmark testing sebanyak 3 kali percobaan.
+`
 
 <br>
 
